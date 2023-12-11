@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import History from './pages/History'
+import History from './pages/HistoryTimer'
 import DefaultLayout from './layouts/Default'
 import Home from './pages/Home'
 
