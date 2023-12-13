@@ -51,9 +51,8 @@ export const Separator = styled.div`
   width: 4rem;
 `;
 
-export const Button = styled.button`
+export const BaseButton = styled.button`
   align-items: center;
-  background: ${(props) => props.theme['green-500']};
   border: 0;
   border-radius: 8px;
   color: ${(props) => props.theme['gray-100']};
@@ -69,10 +68,18 @@ export const Button = styled.button`
     cursor: not-allowed;
     opacity: 0.7;
   }
+`;
+
+export const StartButton = styled(BaseButton)`
+  background: ${(props) => props.theme['green-500']};
 
   &:not(:disabled):hover {
     background: ${(props) => props.theme['green-700']};
   }
+`;
+
+export const StopButton = styled(BaseButton)`
+  background: ${(props) => props.theme['red-700']};
 `;
 
 export const BaseInput = styled.input`
