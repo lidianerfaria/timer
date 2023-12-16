@@ -1,9 +1,14 @@
-import { HistoryContainer, HistoryList, Status } from './styles';
+import { useContext } from 'react'
+import { CyclesContext } from '../../context/CyclesContext'
+import { HistoryContainer, HistoryList, Status } from './styles'
 
 const History = () => {
+  const { cycles } = useContext(CyclesContext)
   return (
     <HistoryContainer>
       <h1>Histórico</h1>
+
+      <pre>{JSON.stringify(cycles, null, 2)}</pre>
 
       <HistoryList>
         <table>
@@ -21,7 +26,7 @@ const History = () => {
               <td>20 minutos</td>
               <td>Há 2 meses</td>
               <td>
-                <Status statusColor='green'>Concluído</Status>
+                <Status statusColor="green">Concluído</Status>
               </td>
             </tr>
             <tr>
@@ -29,7 +34,7 @@ const History = () => {
               <td>20 minutos</td>
               <td>Há 2 meses</td>
               <td>
-                <Status statusColor='red'>Interrompido</Status>
+                <Status statusColor="red">Interrompido</Status>
               </td>
             </tr>
             <tr>
@@ -37,14 +42,14 @@ const History = () => {
               <td>20 minutos</td>
               <td>Há 2 meses</td>
               <td>
-                <Status statusColor='yellow'>Em andamento</Status>
+                <Status statusColor="yellow">Em andamento</Status>
               </td>
             </tr>
           </tbody>
         </table>
       </HistoryList>
     </HistoryContainer>
-  );
-};
+  )
+}
 
-export default History;
+export default History
