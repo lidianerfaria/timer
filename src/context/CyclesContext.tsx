@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useReducer, useState } from 'react'
 
 interface CreateCycleData {
   task: string
@@ -31,11 +31,44 @@ interface CyclesContextProviderProps {
   children: ReactNode
 }
 
+interface CyclesState {
+  cycles: Cycle[]
+  activeCycleId: string | null
+}
+
 const CyclesContextProvider = ({ children }: CyclesContextProviderProps) => {
-  const [cycles, setCycles] = useState<Cycle[]>([])
-  const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+  const [cyclesState, dispatch] = useReducer(
+    (state: CyclesState, action: any) => {
+      if (action.type === 'ADD_NEW_CYCLE') {
+        return {
+          ...state,
+          cycles: [...state.cycles, action.payload.newCycle],
+          activeCycleId: action.payload.newCycle.id,
+        }
+      }
+
+      if (action.type === 'INTERRUPT_CURRENT_CYCLE') {
+        return {
+          ...state,
+          cycles: state.cycles.map((cycle) => {
+            if (cycle.id === state.activeCycleId) {
+              return { ...cycle, interruptedDate: new Date() }
+            } else {
+              return cycle
+            }
+          }),
+          activeCycleId: null,
+        }
+      }
+
+      return state
+    },
+    { cycles: [], activeCycleId: null },
+  )
+
   const [amountSecondsPassed, setAmountSecondsPassed] = useState<number>(0)
 
+  const { cycles, activeCycleId } = cyclesState
   const activeCycle = cycles.find((it) => it.id === activeCycleId)
 
   const setSecondsPassed = (seconds: number) => {
@@ -43,35 +76,38 @@ const CyclesContextProvider = ({ children }: CyclesContextProviderProps) => {
   }
 
   const markCurrentCycleAsFinished = () => {
-    setCycles((prevState) =>
-      prevState.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return { ...cycle, interruptedDate: new Date() }
-        } else {
-          return cycle
-        }
-      }),
-    )
+    dispatch({
+      type: 'MARK_CURRENT_CYCLE_AS_FINISHED',
+      payload: {
+        activeCycleId,
+      },
+    })
   }
 
   const createNewCycle = (data: CreateCycleData) => {
     const id = String(new Date().getTime())
-
     const newCycle: Cycle = {
       id,
       minutesAmount: data.minutesAmount,
       startDate: new Date(),
       task: data.task,
     }
-
-    setCycles((prevState) => [...prevState, newCycle])
-    setActiveCycleId(id)
+    dispatch({
+      type: 'ADD_NEW_CYCLE',
+      payload: {
+        newCycle,
+      },
+    })
     setAmountSecondsPassed(0)
   }
 
   const interruptCurrentCycle = () => {
-    markCurrentCycleAsFinished()
-    setActiveCycleId(null)
+    dispatch({
+      type: 'INTERRUPT_CURRENT_CYCLE',
+      payload: {
+        activeCycleId,
+      },
+    })
   }
 
   return (
