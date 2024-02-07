@@ -1,7 +1,8 @@
 # Timer - Pomodoro
 ### 👩‍💻Sobre o projeto:
 Este projeto tem como foco explorar conceitos do React, desde os mais fundamentais até hooks mais avançados, como useReducer. Também aborda conceitos como imutabilidade, rotas, listagem de dados, compartilhamento de dados entre telas etc.
-Trata-se de uma aplicação pomodoro. Através de um timer o usuário pode iniciar novos ciclos para atividades, interropê-los e gerenciá-los.
+Trata-se de uma aplicação pomodoro. Através de um timer o usuário pode iniciar novos ciclos para atividades, interropê-los e gerenciá-los. <br/>
+👉 [Veja o Timer aqui](https://timer-pomodoro-web.vercel.app/)
 
 ## Recursos:
 - Iniciar novo ciclo de atividade.
