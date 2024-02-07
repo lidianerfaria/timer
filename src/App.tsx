@@ -1,9 +1,9 @@
-import { ThemeProvider } from 'styled-components'
-import { defaultTheme } from './styles/themes/default'
-import { GlobalStyle } from './styles/global'
-import Router from './Router'
-import { BrowserRouter } from 'react-router-dom'
-import CyclesContextProvider from './context/CyclesContext'
+import { ThemeProvider } from 'styled-components';
+import { defaultTheme } from './styles/themes/default';
+import { GlobalStyle } from './styles/global';
+import Router from './Router';
+import { BrowserRouter } from 'react-router-dom';
+import CyclesContextProvider from './context/CyclesContext';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
