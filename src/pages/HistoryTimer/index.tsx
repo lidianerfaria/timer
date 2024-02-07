@@ -10,8 +10,6 @@ const History = () => {
     <HistoryContainer>
       <h1>Histórico</h1>
 
-      <pre>{JSON.stringify(cycles, null, 2)}</pre>
-
       <HistoryList>
         <table>
           <thead>

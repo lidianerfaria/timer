@@ -5,7 +5,6 @@ import { Timer, Scroll } from 'phosphor-react'
 const Header = () => {
   return (
     <HeaderContainer>
-      <span>logo</span>
       <nav>
         <NavLink to="" title="timer">
           <Timer size={24} />

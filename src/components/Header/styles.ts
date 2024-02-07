@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   nav {
     display: flex;
